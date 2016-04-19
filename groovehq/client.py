@@ -36,7 +36,7 @@ class Groove(object):
                                  params=params)
         return resp.json()['tickets']
 
-    def create_ticket(self, body, from_user, to, **kwargs):
+    def create_ticket(self, body, from_user, to_user, **kwargs):
         """
         Create ticket.
 
@@ -59,7 +59,7 @@ class Groove(object):
         data = {
             'body': body,
             'from': from_user,
-            'to': to
+            'to': to_user
         }
         data.update(kwargs)
         resp = self._session.post('https://api.groovehq.com/v1/tickets',
