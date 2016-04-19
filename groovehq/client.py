@@ -36,6 +36,36 @@ class Groove(object):
                                  params=params)
         return resp.json()['tickets']
 
+    def create_ticket(self, body, from_user, to, **kwargs):
+        """
+        Create ticket.
+
+        See https://www.groovehq.com/docs/tickets#listing-tickets for more
+        details.
+
+        :param body: The body of the first comment to add to the ticket
+        :param from_user:   The email address of the agent or customer who sent the ticket or hash of customer attributes (defined below)
+        :param to: The email address of the customer or mailbox that the ticket is addressed to or a hash of customer attributes
+        :param assigned_group: The name of the assigned group
+        :param assignee: The email of the agent to assign the ticket to
+        :param sent_at: Can be used to set the created and updated datetimes to sometime in the past. RFC-822 format preferred
+        :param note: When creating a ticket from an agent, should the message body be added as a private note
+        :param send_copy_to_customer :  When creating a ticket from an agent, should the message be emailed to the customer
+        :param state : The ticket state. Allowed states are: "unread", "opened", "pending", "closed", "spam"
+        :param subject : The email subject of your ticket
+        :param tags :  A list of tag names
+        """
+
+        data = {
+            'body': body,
+            'from': from_user,
+            'to': to
+        }
+        data.update(kwargs)
+        resp = self._session.post('https://api.groovehq.com/v1/tickets',
+                                  json=data)
+        return resp.json()
+
     def get_messages(self, ticket_number, **kwargs):
         """
         Get all messages for a particular ticket.
