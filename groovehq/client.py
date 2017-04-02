@@ -64,7 +64,11 @@ class Groove(object):
         data.update(kwargs)
         resp = self._session.post('https://api.groovehq.com/v1/tickets',
                                   json=data)
-        return resp.json()
+        try:
+            res = resp.json()
+        except ValueError:
+            res = resp.content
+        return resp.status_code, res
 
     def get_messages(self, ticket_number, **kwargs):
         """
