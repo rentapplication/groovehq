@@ -64,7 +64,8 @@ class Groove(object):
         data.update(kwargs)
         resp = self._session.post('https://api.groovehq.com/v1/tickets',
                                   json=data)
-        return resp.json()
+        code = resp.status_code
+        return code, resp.json()
 
     def get_messages(self, ticket_number, **kwargs):
         """
