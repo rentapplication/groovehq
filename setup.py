@@ -9,7 +9,7 @@ setup(
     author_email = 'mhluongo@gmail.com',
     packages = ['groovehq'],
     include_package_data = True,
-    install_requires = ['requests==2.25.0'],
+    install_requires = ['requests<=2.32.3'],
     license='LICENSE',
     url = 'https://github.com/cardforcoin/groovehq',
     keywords = 'groovehq groove api helpdesk',
